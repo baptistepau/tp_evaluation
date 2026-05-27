@@ -2,9 +2,19 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public int damage = 10; 
+
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"Projectile a touché " +  collision.gameObject.name);
-        //TODO BONUS : ajouter des effets de particules quand on touche une surface.
+        Debug.Log("La balle a explosÃ© sur : " + collision.gameObject.name);
+
+        EnemyHealth enemy = collision.gameObject.GetComponent<EnemyHealth>();
+        
+        if (enemy != null)
+        {
+            enemy.TakeDamage(damage);
+        }
+
+        Destroy(gameObject);
     }
 }
